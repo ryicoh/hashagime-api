@@ -9,6 +9,7 @@ import (
 type AppHandler struct {
 	PlanHandler
 	EventHandler
+	PlanEventHandler
 }
 
 type Response struct {
@@ -50,5 +51,6 @@ func NewHandler(r *repository.AppRepository) *AppHandler {
 	h := &AppHandler{}
 	h.PlanHandler = PlanHandler{Repo: &r.PlanRepository}
 	h.EventHandler = EventHandler{Repo: &r.EventRepository}
+	h.PlanEventHandler = PlanEventHandler{Repo: &r.PlanEventRepository}
 	return h
 }

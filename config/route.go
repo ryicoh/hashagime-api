@@ -25,5 +25,13 @@ func NewRoute(e *echo.Echo, h *handler.AppHandler) {
 			e.PUT("/:id", h.EventHandler.Update)
 			e.DELETE("/:id", h.EventHandler.Delete)
 		}
+		pe := v1.Group("/plan_events")
+		{
+			pe.GET("", h.PlanEventHandler.Index)
+			pe.GET("/:id", h.PlanEventHandler.Show)
+			pe.POST("", h.PlanEventHandler.Create)
+			pe.PUT("/:id", h.PlanEventHandler.Update)
+			pe.DELETE("/:id", h.PlanEventHandler.Delete)
+		}
 	}
 }
