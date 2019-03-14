@@ -1,8 +1,6 @@
 package entity
 
-import (
-	"github.com/jinzhu/gorm"
-)
+import "github.com/jinzhu/gorm"
 
 type PlanEvent struct {
 	gorm.Model

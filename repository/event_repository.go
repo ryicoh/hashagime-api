@@ -14,14 +14,15 @@ func (r *EventRepository) FindAll() (events []*entity.Event, err error) {
 	return
 }
 
-func (r *EventRepository) FindOne(id uint) (event entity.Event, err error) {
-	err = r.Conn.First(&event, id).Error
-	return
+func (r *EventRepository) FindOne(id uint) (*entity.Event, error) {
+	var event entity.Event
+	err := r.Conn.First(&event, id).Error
+	return &event, err
 }
 
-func (r *EventRepository) Create(event *entity.Event) (err error) {
-	err = r.Conn.Create(event).Error
-	return
+func (r *EventRepository) Create(event *entity.Event) error {
+	err := r.Conn.Create(event).Error
+	return err
 }
 
 func (r *EventRepository) Update(id uint, event *entity.Event) (err error) {

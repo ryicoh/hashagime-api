@@ -18,6 +18,7 @@ func Start() {
 
 	e := echo.New()
 	NewValidate(e)
+	NewMiddleware(e)
 	NewRoute(e, h)
 	e.Logger.Fatal(e.Start(":1323"))
 }

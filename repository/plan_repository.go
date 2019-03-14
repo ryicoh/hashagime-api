@@ -2,7 +2,6 @@ package repository
 
 import (
 	"detoplan-go/entity"
-	"fmt"
 	"github.com/jinzhu/gorm"
 )
 
@@ -15,18 +14,18 @@ func (r *PlanRepository) FindAll() (plans []*entity.Plan, err error) {
 	return
 }
 
-func (r *PlanRepository) FindOne(id uint) (plan entity.Plan, err error) {
-	if err = r.Conn.First(&plan, id).Error; err != nil {
-		return
+func (r *PlanRepository) FindOne(id uint) (*entity.Plan, error) {
+	var plan *entity.Plan
+	if err := r.Conn.First(&plan, id).Error; err != nil {
+		return plan, err
 	}
-	fmt.Printf("%#v", err)
 	var events []*entity.Event
-	err = r.Conn.Table("events").
+	err := r.Conn.Table("events").
 		Joins("inner join `plan_events` on `events`.`id` = `plan_events`.`event_id`").
 		Where("`plan_id` = ?", plan.ID).
 		Order("`order` asc").Find(&events).Error
 	plan.Events = events
-	return
+	return plan, err
 }
 
 func (r *PlanRepository) Create(plan *entity.Plan) (err error) {

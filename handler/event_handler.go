@@ -42,11 +42,10 @@ func (h *EventHandler) Create(c echo.Context) (err error) {
 	if err := c.Validate(&event); err != nil {
 		return BadRequest(c, err.(validator.ValidationErrors))
 	}
-
 	if err = h.Repo.Create(&event); err != nil {
 		return InternalServerError(c, err)
 	}
-	return c.JSON(http.StatusOK, Response{IsSuccess: true, Result: nil})
+	return c.JSON(http.StatusOK, Response{IsSuccess: true, Result: event})
 }
 
 func (h *EventHandler) Update(c echo.Context) (err error) {
@@ -63,10 +62,10 @@ func (h *EventHandler) Update(c echo.Context) (err error) {
 		return BadRequest(c, err.(validator.ValidationErrors))
 	}
 
-	if err = h.Repo.Update(cast.ToUint(id), &event); err != nil {
+	if err = h.Repo.Update(cast.ToUint(id), &event);err != nil {
 		return InternalServerError(c, err)
 	}
-	return c.JSON(http.StatusOK, Response{IsSuccess: true, Result: nil})
+	return c.JSON(http.StatusOK, Response{IsSuccess: true, Result: event})
 }
 
 func (h *EventHandler) Delete(c echo.Context) (err error) {

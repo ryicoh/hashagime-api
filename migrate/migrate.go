@@ -16,6 +16,8 @@ func main() {
 		&entity.Event{},
 		&entity.Plan{},
 		&entity.PlanEvent{},
+		&entity.Priority{},
+		&entity.Tag{},
 	).Error
 	if err != nil {
 		spew.Dump(err)
@@ -25,6 +27,8 @@ func main() {
 		&entity.Event{},
 		&entity.Plan{},
 		&entity.PlanEvent{},
+		&entity.Priority{},
+		&entity.Tag{},
 	).Error
 	if err != nil {
 		spew.Dump(err)

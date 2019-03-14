@@ -1,12 +1,13 @@
 package entity
 
-import (
-	"github.com/jinzhu/gorm"
-)
+import "github.com/jinzhu/gorm"
 
 type Event struct {
 	gorm.Model
-	Name        string `validate:"required"`
+	Title       string `validate:"required"`
 	Description string `gorm:"type:text" validate:"required"`
+	MarkDown    string `gorm:"type:longtext"`
 	Image       string
+	Priority    *Priority
+	Tags        []*Tag `gorm:"many2many:event_tags"`
 }

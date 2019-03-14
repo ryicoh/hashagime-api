@@ -46,7 +46,7 @@ func (h *PlanHandler) Create(c echo.Context) (err error) {
 	if err = h.Repo.Create(&plan); err != nil {
 		return InternalServerError(c, err)
 	}
-	return c.JSON(http.StatusOK, Response{IsSuccess: true, Result: nil})
+	return c.JSON(http.StatusOK, Response{IsSuccess: true, Result: plan})
 }
 
 func (h *PlanHandler) Update(c echo.Context) (err error) {
@@ -66,7 +66,7 @@ func (h *PlanHandler) Update(c echo.Context) (err error) {
 	if err = h.Repo.Update(cast.ToUint(id), &plan); err != nil {
 		return InternalServerError(c, err)
 	}
-	return c.JSON(http.StatusOK, Response{IsSuccess: true, Result: nil})
+	return c.JSON(http.StatusOK, Response{IsSuccess: true, Result: plan})
 }
 
 func (h *PlanHandler) Delete(c echo.Context) (err error) {
