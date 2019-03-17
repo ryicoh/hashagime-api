@@ -1,7 +1,7 @@
 package main
 
 import (
-	"detoplan-go/config"
+	"hashagime/config"
 )
 
 func main() {

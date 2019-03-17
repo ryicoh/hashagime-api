@@ -1,32 +1,13 @@
 version: '2'
 services:
-  db:
-    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
-    image: mysql:5.7
-    hostname: mysql
-    ports:
-      - "13306:3306"
-    expose:
-      - 13306
-    environment:
-      MYSQL_DATABASE: detoplan
-      MYSQL_USER: root
-      MYSQL_ROOT_PASSWORD: ""
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-    volumes:
-      - data:/var/lib/mysql
-  detoplan:
+  hashagime:
     build:
       context: .
       dockerfile: ./Dockerfile
     ports:
       - "1323:1323"
-    links:
-      - db
     volumes:
-      - .:/go/src/detoplan-go
-      - /go/src/detoplan-go/vendor
+      - .:/go/src/hashagime
+      - /go/src/hashagime/vendor
     cpu_quota: 85000
     mem_limit: 3g
-volumes:
-  data:
